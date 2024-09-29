@@ -15,14 +15,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq curl
-          chmod +x /usr/bin/jq /usr/bin/curl
           which jq
           jq --version
+          which curl
           curl --version
 
       - name: Create Gists for each file
         env:
-          PAT_GITHUB_GIST: ${{ secrets.PAT_GITHUB_GIST }}  # Use the PAT from secrets
+          PAT_GITHUB_GIST: ${{ secrets.PAT_GITHUB_GIST }}  # Ensure this secret name matches
         run: |
           for file in $(git ls-files); do
             echo "Processing file: $file"
@@ -35,7 +35,9 @@ jobs:
             echo "$gist_data"
 
             curl -X POST \
-              -H "Authorization: token $PAT_GITHUB_GIST" \  # Use the PAT token
+              -H "Authorization: token $PAT_GITHUB_GIST" \  # Using token authorization
+              -H "Accept: application/vnd.github+json" \    # Recommended API header
+              -H "X-GitHub-Api-Version: 2022-11-28" \       # Recommended API version header
               -H "Content-Type: application/json" \
               -d "$gist_data" \
               https://api.github.com/gists
