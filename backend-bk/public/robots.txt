@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+
+# Allow all other pages to be indexed
+User-agent: *
+Allow: /
+
+# Specify the location of the sitemap (if available)
+Sitemap: http://elscienceerp.ltsapp.online/sitemap.xml

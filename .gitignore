@@ -4,6 +4,7 @@ frontend/public/
 
 # Ignore the vendor folder in the backend
 backend/vendor/
+backend-bk
 
 # Ignore environment files or sensitive data (optional)
 *.env

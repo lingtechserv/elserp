@@ -1,0 +1,144 @@
+:root {
+    --primary-color: #1EB3A3;
+    --secondary-color: #30C1D5;
+    --tertiary-color: #0BACC2;
+    --button-color: #0AA1B6;
+    --section-color: #004C57;
+    --dark-text: #333333;
+    --content-bg: #F5F5F5;
+  }
+
+  .parentContainer {
+    display: flex;
+  }
+
+  .tableContainer {
+    display: flex;
+    flex-direction: column;
+    max-height: 91vh;
+    overflow: hidden;
+    width: 70vw;
+    padding: 15px;
+  }
+
+  .sidebar {
+    /* You may need to adjust the width or use flex-grow depending on your layout needs */
+    flex-grow: 1;
+    padding: 10px; /* Adjust padding as needed */
+  }
+  
+  .dayScroller > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .timeFilterRow {
+    justify-content: space-between; /* Adjust according to your layout preference */
+  }
+  
+  .arrow {
+    cursor: pointer; /* Makes it clear these are clickable */
+  }
+  
+  .arrow.left { margin-right: 15px; }
+  .arrow.right { margin-left: 15px; }
+  
+  .stickyHeader {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--primary-color); /* Replace with your globalColors.primary */
+    color: white;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 30px;
+  }
+
+  .siderHeader {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    height: 30px;
+  }
+
+  .scrollableBody {
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  
+  .scrollableBody > div {
+    display: flex;
+    border-right: 1px solid var(--secondary-color);
+  }
+  
+  .scrollableBody > div:nth-child(even) {
+    background-color: var(--light-color); /* Replace with your globalColors.light for zebra striping */
+  }
+  
+  /* Direct cell styling not mentioned previously, added now for clarity */
+  .cell {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  /* If there's specific styling for the first column that holds time slots, it should be adjusted here */
+  .timeColumn {
+    width: 4vw;
+    padding: 10px; /* Ensure consistent padding */
+    border-right: 1px solid var(--secondary-color); /* Consistent border */
+  }
+  
+  .equipmentColumn {
+    flex-grow: 1;
+    padding: 10px; /* Consistent padding */
+    text-align: center; /* Center align text */
+  }
+
+  .dropZonesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .droppableZone {
+    border: 2px  #ccc;
+    padding: 10px;
+    width: 14vw;
+    height: 250px;
+    background-color: #30C1D5;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .droppableZone:hover, .droppableZone:active {
+    background-color: #1EB3A3;
+  }
+  
+  .draggableEmployee {
+    margin: 5px 0;
+    padding: 5px 10px;
+    background-color: #1EB3A3;
+    border-radius: 5px;
+    cursor: grab;
+    width: 13vw;
+  }
+  
+  .draggableEmployee:active {
+    cursor: grabbing;
+  }

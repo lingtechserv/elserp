@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "public"
+		},
+		{
+			"path": "frontend/dist"
+		},
+		{
+			"path": "frontend/src"
+		},
+		{
+			"path": "app/Http/Controllers"
+		},
+		{
+			"path": "app/Models"
+		},
+		{
+			"path": "app/Http/Middleware"
+		}
+	]
+}

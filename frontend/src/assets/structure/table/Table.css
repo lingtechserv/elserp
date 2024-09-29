@@ -1,0 +1,96 @@
+.custom-table-wrapper {
+  display: block;
+  overflow-y: auto;
+  max-height: calc(100vh - 60px); /* You may need to adjust this */
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: white; /* This color can be adjusted as needed */
+  z-index: 1;
+}
+
+.custom-table-row, .custom-table-expanded-row {
+  animation: rowAnimation 0.5s ease;
+}
+
+.row-background {
+  background-color: white;
+}
+
+.alternate-row-background {
+  background-color: lightgrey;
+}
+
+.custom-table-cell {
+  border: 1px solid black;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.cell-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.expansion-control-cell {
+  width: 15px;
+  padding: 0;
+}
+
+@keyframes rowAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.custom-badge {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+  font-size: 12px;
+}

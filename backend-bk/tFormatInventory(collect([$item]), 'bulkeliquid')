@@ -1,0 +1,47 @@
+[90m= [39m[34;4mApp\Models\BulkELiquid[39;24m {#6313
+    [34mid[39m: [35m1[39m,
+    [34msku[39m: "[32mBLK3564[39m",
+    [34mname[39m: "[32mVoluptas earum sed.[39m",
+    [34mdescription[39m: "[32mMaxime qui sed officia quae. Provident nesciunt molestiae omnis nulla rerum. Esse rerum impedit nostrum molestiae. Aliquid eveniet voluptatum neque cum maxime soluta.[39m",
+    [34mrmc_product[39m: "[32mdolor[39m",
+    [34mactive[39m: "[32m1[39m",
+    [34mcreated_at[39m: "[32m2023-12-19 08:48:37[39m",
+    [34mupdated_at[39m: "[32m2023-12-19 08:48:37[39m",
+    [34mlocations[39m: [34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6328
+      [34mall[39m: [
+        [34;4mApp\Models\InventoryLocation[39;24m {#6332
+          [34mid[39m: [35m360[39m,
+          [34mparentlocationid[39m: [35m355[39m,
+          [34mname[39m: "[32mBin 10[39m",
+          [34mtype[39m: "[32mBin[39m",
+          [34mdescription[39m: "[32mOdio fugit asperiores qui et quidem nihil.[39m",
+          [34mcreated_at[39m: "[32m2023-12-21 11:06:46[39m",
+          [34mupdated_at[39m: "[32m2023-12-21 11:06:46[39m",
+          [34mpivot[39m: [34;4mIlluminate\Database\Eloquent\Relations\Pivot[39;24m {#6330
+            [34mbulkeliquid_id[39m: [35m1[39m,
+            [34mlocation_id[39m: [35m360[39m,
+            [34mquantity[39m: [35m60[39m,
+            [34mmqoh[39m: [35m40[39m,
+            [34mreorder[39m: [35m61[39m,
+          },
+        },
+        [34;4mApp\Models\InventoryLocation[39;24m {#6333
+          [34mid[39m: [35m1119[39m,
+          [34mparentlocationid[39m: [35m1111[39m,
+          [34mname[39m: "[32mBin 8[39m",
+          [34mtype[39m: "[32mBin[39m",
+          [34mdescription[39m: "[32mEveniet totam aut doloribus autem ut.[39m",
+          [34mcreated_at[39m: "[32m2023-12-21 11:06:47[39m",
+          [34mupdated_at[39m: "[32m2023-12-21 11:06:47[39m",
+          [34mpivot[39m: [34;4mIlluminate\Database\Eloquent\Relations\Pivot[39;24m {#6329
+            [34mbulkeliquid_id[39m: [35m1[39m,
+            [34mlocation_id[39m: [35m1119[39m,
+            [34mquantity[39m: [35m130[39m,
+            [34mmqoh[39m: [35m41[39m,
+            [34mreorder[39m: [35m63[39m,
+          },
+        },
+      ],
+    },
+  }
+
