@@ -1,0 +1,47 @@
+name: Update Gists for Modified Files
+
+on:
+  push:
+    branches:
+      - main  # Specify the branch where you want the action to trigger
+
+jobs:
+  update_gists:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install jq and curl
+        run: sudo apt-get update && sudo apt-get install -y jq curl
+
+      - name: Get modified files
+        id: modified_files
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > modified_files.txt
+          echo "Modified files:"
+          cat modified_files.txt
+
+      - name: Update Gists for modified files
+        if: success() && steps.modified_files.outputs.modified_files != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIST_ID: 7a2e16cf9a0c5d13aedc40cf7f2a764b  # Replace with the correct Gist ID
+        run: |
+          for file in $(cat modified_files.txt); do
+            if [ -f "$file" ]; then
+              gist_data=$(jq -n \
+                --arg filename "$file" \
+                --arg content "$(cat $file)" \
+                '{ "files": {($filename): {"content": $content}}}')
+    
+              curl -X PATCH \
+                -H "Authorization: token $GITHUB_TOKEN" \
+                -H "Content-Type: application/json" \
+                -d "$gist_data" \
+                https://api.github.com/gists/$GIST_ID
+    
+              echo "Updated Gist $GIST_ID with file $file"
+            fi
+          done
