@@ -1,0 +1,20 @@
+# Ignore the node_modules folder in the frontend
+frontend/dist/
+frontend/public/
+
+# Ignore the vendor folder in the backend
+backend/vendor/
+
+# Ignore environment files or sensitive data (optional)
+*.env
+
+# Ignore build files (optional)
+dist/
+build/
+
+# Ignore log files (optional)
+*.log
+
+# Ignore IDE files like VSCode, MacOS, etc.
+.vscode/
+.DS_Store
