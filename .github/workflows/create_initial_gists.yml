@@ -1,10 +1,10 @@
-name: Create Initial Gists
+name: Add Files to Specific Gist
 
 on:
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
-  create_gists:
+  add_files_to_gist:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,27 +20,29 @@ jobs:
           which curl
           curl --version
 
-      - name: Create Gists for each file
+      - name: Add files to the specific Gist
         env:
           PAT_GITHUB_GIST: ${{ secrets.PAT_GITHUB_GIST }}  # Ensure this secret name matches
         run: |
+          GIST_ID="7a2e16cf9a0c5d13aedc40cf7f2a764b"  # Your specific Gist ID
+          
           for file in $(git ls-files); do
             echo "Processing file: $file"
             gist_data=$(jq -n \
               --arg filename "$file" \
               --arg content "$(cat $file)" \
-              '{ "files": {($filename): {"content": $content}}, "public": true }')
+              '{ "files": {($filename): {"content": $content}}}')
 
             echo "Payload for $file:"
             echo "$gist_data"
 
-            curl -X POST \
-              -H "Authorization: token $PAT_GITHUB_GIST" \  # Using token authorization
-              -H "Accept: application/vnd.github+json" \    # Recommended API header
-              -H "X-GitHub-Api-Version: 2022-11-28" \       # Recommended API version header
+            curl -X PATCH \
+              -H "Authorization: token $PAT_GITHUB_GIST" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
               -H "Content-Type: application/json" \
               -d "$gist_data" \
-              https://api.github.com/gists
+              https://api.github.com/gists/$GIST_ID
 
-            echo "Created Gist for $file"
+            echo "Added file $file to Gist $GIST_ID"
           done
