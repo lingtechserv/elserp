@@ -1,7 +1,7 @@
 name: Create Initial Gists
 
 on:
-  workflow_dispatch:  # This allows you to run this action manually from the GitHub UI
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   create_gists:
@@ -9,10 +9,14 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to v3
 
       - name: Install jq and curl
-        run: sudo apt-get update && sudo apt-get install -y jq curl
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq curl
+          which jq
+          which curl
 
       - name: Create Gists for each file
         env:
