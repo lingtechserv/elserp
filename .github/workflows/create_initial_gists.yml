@@ -1,0 +1,34 @@
+name: Create Initial Gists
+
+on:
+  workflow_dispatch:  # This allows you to run this action manually from the GitHub UI
+
+jobs:
+  create_gists:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install jq and curl
+        run: sudo apt-get update && sudo apt-get install -y jq curl
+
+      - name: Create Gists for each file
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for file in $(git ls-files); do
+            gist_data=$(jq -n \
+              --arg filename "$file" \
+              --arg content "$(cat $file)" \
+              '{ "files": {($filename): {"content": $content}}, "public": true }')
+
+            curl -X POST \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "$gist_data" \
+              https://api.github.com/gists
+
+            echo "Created Gist for $file"
+          done
