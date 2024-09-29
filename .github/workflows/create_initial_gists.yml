@@ -9,26 +9,20 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Updated to v3 to address Node.js deprecation
+        uses: actions/checkout@v3
 
       - name: Install jq and curl
         run: |
           sudo apt-get update
           sudo apt-get install -y jq curl
-          chmod +x /usr/bin/jq /usr/bin/curl  # Ensure jq and curl are executable
+          chmod +x /usr/bin/jq /usr/bin/curl
           which jq
-          which curl
           jq --version
           curl --version
 
-      - name: Debugging environment
-        run: |
-          echo "Checking current directory:"
-          ls -l
-
       - name: Create Gists for each file
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_GITHUB: ${{ secrets.NEWGISTSECRET }}  # Reference the secret here
         run: |
           for file in $(git ls-files); do
             echo "Processing file: $file"
@@ -41,7 +35,7 @@ jobs:
             echo "$gist_data"
 
             curl -X POST \
-              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Authorization: token $PAT_GITHUB" \  # Use the PAT from secrets
               -H "Content-Type: application/json" \
               -d "$gist_data" \
               https://api.github.com/gists
