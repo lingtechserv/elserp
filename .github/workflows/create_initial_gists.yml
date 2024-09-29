@@ -9,24 +9,36 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Updated to v3
+        uses: actions/checkout@v3  # Updated to v3 to address Node.js deprecation
 
       - name: Install jq and curl
         run: |
           sudo apt-get update
           sudo apt-get install -y jq curl
+          chmod +x /usr/bin/jq /usr/bin/curl  # Ensure jq and curl are executable
           which jq
           which curl
+          jq --version
+          curl --version
+
+      - name: Debugging environment
+        run: |
+          echo "Checking current directory:"
+          ls -l
 
       - name: Create Gists for each file
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           for file in $(git ls-files); do
+            echo "Processing file: $file"
             gist_data=$(jq -n \
               --arg filename "$file" \
               --arg content "$(cat $file)" \
               '{ "files": {($filename): {"content": $content}}, "public": true }')
+
+            echo "Payload for $file:"
+            echo "$gist_data"
 
             curl -X POST \
               -H "Authorization: token $GITHUB_TOKEN" \
