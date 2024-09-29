@@ -22,7 +22,7 @@ jobs:
 
       - name: Create Gists for each file
         env:
-          PAT_GITHUB: ${{ secrets.NEWGISTSECRET }}  # Reference the secret here
+          FINEGRAINED_GIST_TOKEN: ${{ secrets.FINEGRAINED_GIST_TOKEN }}  # Use the fine-grained token
         run: |
           for file in $(git ls-files); do
             echo "Processing file: $file"
@@ -35,8 +35,9 @@ jobs:
             echo "$gist_data"
 
             curl -X POST \
-              -H "Authorization: token $PAT_GITHUB" \  # Use the PAT from secrets
-              -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $FINEGRAINED_GIST_TOKEN" \  # Use the Bearer token for auth
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
               -d "$gist_data" \
               https://api.github.com/gists
 
